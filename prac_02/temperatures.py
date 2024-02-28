@@ -1,34 +1,30 @@
-"""
-CP1404/CP5632 - Practical
-Broken program to determine score status
-"""
+def celsius_to_fahrenheit(celsius):
+    return celsius * 9.0 / 5 + 32
 
+def fahrenheit_to_celsius(fahrenheit):
+    return 5 / 9 * (fahrenheit - 32)
 
-score = float(input("Enter score: "))
-if score < 0:
-    print("Invalid score")
-else:
-    if score > 100:
-        print("Invalid score")
-    if score > 50:
-        print("Passable")
-    if score > 90:
-    print("Excellent")
-if score < 50:
-    print("Bad")
+def main():
+    MENU = """C - Convert Celsius to Fahrenheit
+F - Convert Fahrenheit to Celsius
+Q - Quit"""
+    print(MENU)
+    choice = input(">>> ").upper()
 
+    while choice != "Q":
+        if choice == "C":
+            celsius = float(input("Celsius: "))
+            fahrenheit = celsius_to_fahrenheit(celsius)
+            print(f"Result: {fahrenheit:.2f} F")
+        elif choice == "F":
+            fahrenheit = float(input("Fahrenheit: "))
+            celsius = fahrenheit_to_celsius(fahrenheit)
+            print(f"Result: {celsius:.2f} C")
+        else:
+            print("Invalid option")
+        print(MENU)
+        choice = input(">>> ").upper()
 
-#fixed ver
-score = float(input("Enter score: "))
+    print("Thank you.")
 
-if score < 0 or score > 100:
-    print("invalid score")
-elif score > 90:
-    print("Excellent")
-elif score > 50:
-    print("Passable")
-else:
-    print("Bad")
-
-
-
+main()
