@@ -9,22 +9,30 @@ The price should be displayed to the nearest cent (e.g. $33.59, not $33.59182329
 """
 import random
 
-MAX_INCREASE = 0.175  # 17.5%
-MAX_DECREASE = 0.  # 5%
-MIN_PRICE = 1
-MAX_PRICE = 100
-INITIAL_PRICE = 50.0
-days_past = 0
+# Constants
+MAX_INCREASE = 0.175  # 17.5% maximum increase
+MAX_DECREASE = 0.05   # 5% maximum decrease
+MIN_PRICE = 1         # Minimum price of $1
+MAX_PRICE = 100       # Maximum price of $100
+INITIAL_PRICE = 50.0  # Starting price
+OUTPUT_FILE = "stock_price_simulation.txt"  # Output file name
 
 price = INITIAL_PRICE
-print(f"${price:,.2f}")
+days_past = 0
+
+out_file = open(OUTPUT_FILE, 'w')
+
+print(f"Starting price: ${price:,.2f}", file=out_file)
 
 while MIN_PRICE <= price <= MAX_PRICE:
-    price_change = 0
+    days_past += 1
     if random.randint(1, 2) == 1:
         price_change = random.uniform(0, MAX_INCREASE)
     else:
         price_change = random.uniform(-MAX_DECREASE, 0)
 
     price *= (1 + price_change)
-    print(f"On day {days_past + 1} price is${price:,.2f}")
+
+    print(f"On day {days_past} price is: ${price:,.2f}", file=out_file)
+
+out_file.close()
